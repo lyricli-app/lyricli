@@ -2,21 +2,31 @@
 public class Lyricli {
     public static var version = "0.0.0-feature/option-parsing"
 
+    public static var showTitle = false
+
     public static func printLyrics() {
 
         let sourceManager = SourceManager()
 
         if let currentTrack = sourceManager.currentTrack {
-            print(currentTrack.artist)
-            print(currentTrack.name)
+
+            let engine = LyricsEngine(withTrack: currentTrack)
+
+            if let lyrics = engine.lyrics {
+                if showTitle {
+                    printTitle(currentTrack)
+                }
+
+                print(lyrics)
+            }
+            else {
+                print("Lyrics not found :(")
+            }
+
         }
         else {
-            print("Current track not found")
+            print("No Artist/Song could be found :(")
         }
-    }
-
-    public static func printTitle() {
-        print("Getting Song Title: Not yet implemented")
     }
 
     public static func printSources() {
@@ -33,5 +43,9 @@ public class Lyricli {
 
     public static func resetSource(_ sourceName: String) {
         print("Reset source \(sourceName): Not yet implemented")
+    }
+
+    private static func printTitle(_ track: Track) {
+        print("\(track.artist) - \(track.name)")
     }
 }

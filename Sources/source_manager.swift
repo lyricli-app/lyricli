@@ -1,5 +1,5 @@
 /// Manages the different sources. Keeps track of them, lists and toggles
-public class SourceManager {
+class SourceManager {
 
     private var availableSources: [String: Source] = [
         "arguments": ArgumentsSource()

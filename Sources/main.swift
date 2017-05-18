@@ -80,7 +80,7 @@ func main() {
 
     if let titleFlag = flags["title"] as? BoolOption {
         if titleFlag.value == true {
-            Lyricli.printTitle()
+            Lyricli.showTitle = true
         }
     }
 

@@ -1,7 +1,7 @@
 /// Contains the artist and name of a track
-public class Track {
-    public let name: String
-    public let artist: String
+class Track {
+    let name: String
+    let artist: String
 
     init(withName trackName: String, andArtist trackArtist: String) {
 
