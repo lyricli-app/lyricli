@@ -84,6 +84,10 @@ func main() {
         }
     }
 
+    // Remove any flags so anyone after this gets the unprocessed values
+    let programName: [String] = [CommandLine.arguments[0]]
+    CommandLine.arguments = programName + parser.unparsedArguments
+
     Lyricli.printLyrics()
 }
 

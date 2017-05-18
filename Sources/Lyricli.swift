@@ -3,7 +3,16 @@ public class Lyricli {
     public static var version = "0.0.0-feature/option-parsing"
 
     public static func printLyrics() {
-        print("Getting Lyrics: Not yet implemented")
+
+        let sourceManager = SourceManager()
+
+        if let currentTrack = sourceManager.currentTrack {
+            print(currentTrack.artist)
+            print(currentTrack.name)
+        }
+        else {
+            print("Current track not found")
+        }
     }
 
     public static func printTitle() {
