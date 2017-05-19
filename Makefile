@@ -25,6 +25,18 @@ test: build
 lint:
 	cd Sources && swiftlint
 
+document: build
+	sourcekitten doc --spm-module $(source_binary_name) > $(build_path)/$(source_binary_name).json
+	jazzy \
+		-s $(build_path)/$(source_binary_name).json \
+		--readme README.md \
+		--clean \
+		--author Lyricli \
+		--author_url https://github.com/lyricli-app \
+		--github_url https://github.com/lyricli-app/lyricli \
+		--module-version 0.0.0 \
+		--module Lyricli \
+
 clean:
 	swift build --clean
 
