@@ -12,7 +12,7 @@ script:
   - make lint
   - make build
 
-after_success:
+before_deploy:
   - make document
 
 deploy:
