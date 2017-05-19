@@ -80,9 +80,13 @@ func main() {
 
     if let titleFlag = flags["title"] as? BoolOption {
         if titleFlag.value == true {
-            Lyricli.printTitle()
+            Lyricli.showTitle = true
         }
     }
+
+    // Remove any flags so anyone after this gets the unprocessed values
+    let programName: [String] = [CommandLine.arguments[0]]
+    CommandLine.arguments = programName + parser.unparsedArguments
 
     Lyricli.printLyrics()
 }
