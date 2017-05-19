@@ -3,5 +3,9 @@ language:
 
 osx_image: xcode8.3
 
+install:
+  - ./Scripts/install_swiftlint.sh
+
 script:
+  - make lint
   - make build
