@@ -22,7 +22,10 @@ install: build
 test: build
 	swift test
 
+lint:
+	cd Sources && swiftlint
+
 clean:
 	swift build --clean
 
-.PHONY: build test clean
+.PHONY: build install test clean lint
