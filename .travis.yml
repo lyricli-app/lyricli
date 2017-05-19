@@ -21,7 +21,7 @@ deploy:
   github_token: "$GITHUB_TOKEN"
   local_dir: docs
   on:
-    branch: feature/rbdr-document-and-cleanup
+    branch: master
 
 env:
   global:
