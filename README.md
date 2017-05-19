@@ -63,6 +63,12 @@ This can be done by overriding the `install_path` variable
 make install install_path=/opt/bin
 ```
 
+## Linting and Generating Documentation
+
+We use [swiftlint][swiftlint] to lint, and `make lint` to run it.
+We use [jazzy][jazzy] and [SourceKitten][sourcekitten] to document, and
+`make document` to generate it.
+
 ## Running tests
 
 No tests at the moment 😬... but the makefile is mapped to run the swift
@@ -73,3 +79,7 @@ make test
 ```
 
 [![Build Status](https://travis-ci.org/lyricli-app/lyricli.svg?branch=master)](https://travis-ci.org/lyricli-app/lyricli)
+
+[swiftlint]: https://github.com/realm/SwiftLint
+[jazzy]: https://github.com/realm/jazzy
+[sourcekitten]: https://github.com/jpsim/SourceKitten
