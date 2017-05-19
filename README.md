@@ -71,3 +71,5 @@ tests.
 ```
 make test
 ```
+
+[![Build Status](https://travis-ci.org/lyricli-app/lyricli.svg?branch=master)](https://travis-ci.org/lyricli-app/lyricli)
