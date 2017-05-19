@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Documentation with Jazzy / SourceKitten
 - Apache License
 - Documentation to help use lyricli and contribute
 - Makefile to help build and install
