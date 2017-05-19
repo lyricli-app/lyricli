@@ -18,13 +18,11 @@ public class Lyricli {
                 }
 
                 print(lyrics)
-            }
-            else {
+            } else {
                 print("Lyrics not found :(")
             }
 
-        }
-        else {
+        } else {
             print("No Artist/Song could be found :(")
         }
     }

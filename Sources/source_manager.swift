@@ -6,16 +6,13 @@ class SourceManager {
     ]
 
     var currentTrack: Track? {
-        get {
-
-            for source in enabledSources {
-                if let currentTrack = source.currentTrack {
-                    return currentTrack
-                }
+        for source in enabledSources {
+            if let currentTrack = source.currentTrack {
+                return currentTrack
             }
-
-            return nil
         }
+
+        return nil
     }
 
     var enabledSources: [Source] {
@@ -23,19 +20,17 @@ class SourceManager {
         // Checks the config and returns an array of sources based on the
         // enabled and available ones
 
-        get {
-            var sources = [Source]()
+        var sources = [Source]()
 
-            if let sourceNames = Configuration.sharedInstance["enabled_sources"] as? [String]{
-                for sourceName in sourceNames {
-                    if let source = availableSources[sourceName] {
-                        sources.append(source)
-                    }
+        if let sourceNames = Configuration.sharedInstance["enabled_sources"] as? [String] {
+            for sourceName in sourceNames {
+                if let source = availableSources[sourceName] {
+                    sources.append(source)
                 }
             }
-
-            return sources
         }
+
+        return sources
     }
 
     func enable(sourceName: String) {

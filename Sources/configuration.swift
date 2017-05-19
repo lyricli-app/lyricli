@@ -21,14 +21,19 @@ public class Configuration {
         // IMPROVEMENT: Enable a debug mode
 
         if let data = try? NSData(contentsOfFile: configurationPath) as Data {
-            if let parsedConfig = try? JSONSerialization.jsonObject(with: data) as! [String:Any] {
-                for (key, value) in parsedConfig {
+            if let parsedConfig = try? JSONSerialization.jsonObject(with: data) {
+                if let parsedConfig = parsedConfig as? [String: Any] {
+                    for (key, value) in parsedConfig {
 
-                    if key == "enabled_sources" {
-                        configuration[key] = value as! [String]
-                    }
-                    else {
-                        configuration[key] = value as! String
+                        if key == "enabled_sources" {
+                            if let value = value as? [String] {
+                                configuration[key] = value
+                            }
+                        } else {
+                            if let value = value as? String {
+                                configuration[key] = value
+                            }
+                        }
                     }
                 }
             }
@@ -43,7 +48,10 @@ public class Configuration {
 
         if let outputStream = OutputStream(toFileAtPath: configurationPath, append: false) {
             outputStream.open()
-            JSONSerialization.writeJSONObject(configuration, to: outputStream, options: [JSONSerialization.WritingOptions.prettyPrinted], error: &error)
+            JSONSerialization.writeJSONObject(configuration,
+                    to: outputStream,
+                    options: [JSONSerialization.WritingOptions.prettyPrinted],
+                    error: &error)
             outputStream.close()
         }
     }

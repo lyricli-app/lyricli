@@ -13,40 +13,37 @@ class LyricsEngine {
     // Fetches the lyrics and returns if found
 
     var lyrics: String? {
-        get {
+        var lyrics: String?
 
-            var lyrics: String?
+        if let artist = track.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let name: String = track.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                if let url = URL(string: "\(apiURL)&artist=\(artist)&song=\(name)") {
 
-            if let artist = track.artist.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                if let name: String = track.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                    if let url = URL(string: "\(apiURL)&artist=\(artist)&song=\(name)") {
+                    // We'll lock until the async call is finished
 
-                        // We'll lock until the async call is finished
+                    var requestFinished = false
+                    let asyncLock = NSCondition()
+                    asyncLock.lock()
 
-                        var requestFinished = false
-                        let asyncLock = NSCondition()
-                        asyncLock.lock()
+                    // Call the API and unlock when you're done
 
-                        // Call the API and unlock when you're done
-
-                        fetchLyricsFromAPI(withURL: url, completionHandler: {lyricsResult -> Void in
-                            if let lyricsResult = lyricsResult {
-                                lyrics = lyricsResult
-                                requestFinished = true
-                                asyncLock.signal()
-                            }
-                        })
-
-                        while(!requestFinished) {
-                            asyncLock.wait()
+                    fetchLyricsFromAPI(withURL: url, completionHandler: {lyricsResult -> Void in
+                        if let lyricsResult = lyricsResult {
+                            lyrics = lyricsResult
+                            requestFinished = true
+                            asyncLock.signal()
                         }
-                        asyncLock.unlock()
+                    })
+
+                    while !requestFinished {
+                        asyncLock.wait()
                     }
+                    asyncLock.unlock()
                 }
             }
-
-            return lyrics
         }
+
+        return lyrics
     }
 
     init(withTrack targetTrack: Track) {
@@ -61,20 +58,21 @@ class LyricsEngine {
         var apiRequest = URLRequest(url: url)
         apiRequest.httpMethod = "GET"
 
-        let task = URLSession.shared.dataTask(with: apiRequest, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: apiRequest, completionHandler: {data, _, _ -> Void in
 
             // If the response is parseable JSON, and has a url, we'll look for
             // the lyrics in there
 
             if let data = data {
-                let jsonResponse = try? JSONSerialization.jsonObject(with: data) as! [String: Any]
-                if let jsonResponse = jsonResponse {
-                    if let lyricsUrlString = jsonResponse["url"] as? String {
-                        if let lyricsUrl = URL(string: lyricsUrlString) {
+                if let jsonResponse = try? JSONSerialization.jsonObject(with: data) {
+                    if let jsonResponse = jsonResponse as? [String: Any] {
+                        if let lyricsUrlString = jsonResponse["url"] as? String {
+                            if let lyricsUrl = URL(string: lyricsUrlString) {
 
-                            // At this point we have a valid wiki url
-                            self.fetchLyricsFromPage(withURL: lyricsUrl, completionHandler: completionHandler)
-                            return
+                                // At this point we have a valid wiki url
+                                self.fetchLyricsFromPage(withURL: lyricsUrl, completionHandler: completionHandler)
+                                return
+                            }
                         }
                     }
                 }
@@ -92,7 +90,7 @@ class LyricsEngine {
         var pageRequest = URLRequest(url: url)
         pageRequest.httpMethod = "GET"
 
-        let task = URLSession.shared.dataTask(with: pageRequest, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: pageRequest, completionHandler: {data, _, _ -> Void in
 
             // If the response is parseable JSON, and has a url, we'll look for
             // the lyrics in there
