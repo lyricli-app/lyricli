@@ -29,9 +29,11 @@ To report unacceptabe behavior, send an [e-mail][email]
 
 * Run [swiftlint][swiftlint] on the Source directory and make sure there are no errors
 * There should be no warnings on compilation
+* [CI][ci] should be green
 * Make the PRs according to [Git Flow][gitflow]: (features go to
   develop, hotfixes go to master)
 
 [gitflow]: https://github.com/nvie/gitflow
 [swiftlint]: https://github.com/realm/SwiftLint
 [email]: mailto:ben@nsovocal.com
+[ci]: https://travis-ci.org/lyricli-app/lyricli
