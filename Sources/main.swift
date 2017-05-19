@@ -21,6 +21,21 @@ func createParser() -> ([String:Option], CommandLineKit) {
 
     parser.addOptions(Array(flags.values))
 
+    parser.formatOutput = {parseString, type in
+
+        var formattedString: String
+
+        switch(type) {
+        case .About:
+            formattedString = "\(parseString) [<artist_name> <song_name>]"
+            break
+        default:
+            formattedString = parseString
+        }
+
+        return parser.defaultFormat(formattedString, type: type)
+    }
+
     return (flags, parser)
 }
 
