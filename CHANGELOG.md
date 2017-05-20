@@ -4,12 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [0.2.0]
 ### Added
 - iTunes Source Support
 
 ### Fixed
 - Lyricli freezes when no track found
+- README URLs
 
 ## 0.1.0 - 2017-05-20
 ### Added
@@ -23,4 +24,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Parsing of options to match legacy lyricli
 - Placeholder for the library with expected endpoints
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/master...develop
+[Unreleased]: https://github.com/lyricli-app/lyricli/compare/0.1.0...0.2.0
+[Unreleased]: https://github.com/lyricli-app/lyricli/compare/master...develop

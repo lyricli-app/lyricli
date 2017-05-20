@@ -34,7 +34,7 @@ document: build
 		--author Lyricli \
 		--author_url https://github.com/lyricli-app \
 		--github_url https://github.com/lyricli-app/lyricli \
-		--module-version 0.1.0 \
+		--module-version 0.2.0 \
 		--module Lyricli \
 
 clean:
