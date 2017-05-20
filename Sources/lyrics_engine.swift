@@ -36,11 +36,9 @@ class LyricsEngine {
                     // Call the API and unlock when you're done
 
                     fetchLyricsFromAPI(withURL: url, completionHandler: {lyricsResult -> Void in
-                        if let lyricsResult = lyricsResult {
-                            lyrics = lyricsResult
-                            requestFinished = true
-                            asyncLock.signal()
-                        }
+                        lyrics = lyricsResult
+                        requestFinished = true
+                        asyncLock.signal()
                     })
 
                     while !requestFinished {
