@@ -1,52 +1,50 @@
-/// Manages the different sources. Keeps track of them, lists and toggles
+// Collect and manage the available and enabled source
 class SourceManager {
 
+    // List of sources enabled for the crurent platform
     private var availableSources: [String: Source] = [
         "arguments": ArgumentsSource()
     ]
 
+    // Iterate over the sources until we find a track or run out of sources
     var currentTrack: Track? {
-        get {
-
-            for source in enabledSources {
-                if let currentTrack = source.currentTrack {
-                    return currentTrack
-                }
+        for source in enabledSources {
+            if let currentTrack = source.currentTrack {
+                return currentTrack
             }
-
-            return nil
         }
+
+        return nil
     }
 
+    // Return the list of enabled sources based on the configuration
     var enabledSources: [Source] {
 
         // Checks the config and returns an array of sources based on the
         // enabled and available ones
 
-        get {
-            var sources = [Source]()
+        var sources = [Source]()
 
-            if let sourceNames = Configuration.sharedInstance["enabled_sources"] as? [String]{
-                for sourceName in sourceNames {
-                    if let source = availableSources[sourceName] {
-                        sources.append(source)
-                    }
+        if let sourceNames = Configuration.shared["enabled_sources"] as? [String] {
+            for sourceName in sourceNames {
+                if let source = availableSources[sourceName] {
+                    sources.append(source)
                 }
             }
-
-            return sources
         }
+
+        return sources
     }
 
+    // Given a source name, it will enable it and add it to the enabled sources config
     func enable(sourceName: String) {
     }
 
+    // Given a source name, it will remove it from the enabled sources config
     func disable(sourceName: String) {
     }
 
+    // Given a source name, it removes any stored configuration and disables it
     func reset(sourceName: String) {
-    }
-
-    func getSources(sourceName: String) {
     }
 }

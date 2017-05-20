@@ -1,0 +1,28 @@
+language:
+  - swift
+
+osx_image: xcode8.3
+
+install:
+  - gem install jazzy
+  - "./Scripts/install_sourcekitten.sh"
+  - "./Scripts/install_swiftlint.sh"
+
+script:
+  - make lint
+  - make build
+
+before_deploy:
+  - make document
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: "$GITHUB_TOKEN"
+  local_dir: docs
+  on:
+    branch: master
+
+env:
+  global:
+    secure: EyOzJFSGY2ifBVqnQz7Xc0sDcg9maLb7VDKWIC2+1n2RsMHGptsxDfJf9r/bOc2kJN9mCzw19eA3XTkypeHKgIgPZ+boLPTDqiiNcD+0iVkYxqw/Q0v5et1+pJaOUo93cKfl2WLWXvISU1MYuzbjGwmnjPDUmujTwGZH1SFvhOKynqx9V/PiL4ZF+CurU2far+diLDhJXUPT4mDV6lDfiALUBvfj50AplM928Vwc6xr71SFii4fE+1GGGGI23ZyXmhnYIJBfQ/9d2wzW6szSRz+q0Gq8jQFJ2cZmBQPnfPY6/xARkDIf5H55HIxLg8pqA7Yn+WDT6/a8uoFLY6OzI8B/TTZ/pX4LXhkK0gbmXeeigRjxN3Dcsb++n9e5+3/Bq0y/Vm+Ufy+TtEvExvU6vdzDu8YZQaE0T2Loyqaw3BQBMoCunv4i7z0crXTLyNYNuc3zDGDmjkR3laxX8lcEZ85zTRTuYqxmvQxkxWUHKYQOvGy7SfkD1xc73f1XvCqpx45utZX0U/OzIxRflWFNy4mlgLvo23h5T0b44LGBBBWEVkjt5YduOuSo9L1wtOrADcDYyxSciIby2SHd4B2fGOb059KyCIUcX/qgOS6FJlmPeC963NCAuZB6DyscaoT6DrJto9nuZW2wNYdo7dvCC2E4ZqHnRPl2zux/RTmeuCU=

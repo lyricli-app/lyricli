@@ -1,11 +1,44 @@
 import CommandLineKit
 import Foundation
 
+// Entry point of the application. This is the main executable
+private func main() {
+    let (flags, parser) = createParser()
+
+    do {
+        try parser.parse()
+    } catch {
+        parser.printUsage(error)
+        exit(EX_USAGE)
+    }
+
+    // Boolean Options
+
+    checkHelpFlag(flags["help"], withParser: parser)
+    checkVersionFlag(flags["version"], withParser: parser)
+    checkListSourcesFlag(flags["listSources"], withParser: parser)
+    checkTitleFlag(flags["title"], withParser: parser)
+
+    // String Options
+
+    checkEnableSourceFlag(flags["enableSource"], withParser: parser)
+    checkDisableSourceFlag(flags["disableSource"], withParser: parser)
+    checkResetSourceFlag(flags["resetSource"], withParser: parser)
+
+    // Remove any flags so anyone after this gets the unprocessed values
+
+    let programName: [String] = [CommandLine.arguments[0]]
+    CommandLine.arguments = programName + parser.unparsedArguments
+
+    // Run Lyricli
+
+    Lyricli.printLyrics()
+}
+
 /// Sets up and returns a new options parser
 /// 
 /// - Returns: A Dictionary of Options, and a new CommandLineKit instance
-func createParser() -> ([String:Option], CommandLineKit) {
-
+private func createParser() -> ([String:Option], CommandLineKit) {
     let parser = CommandLineKit()
     var flags: [String:Option] = [:]
 
@@ -21,74 +54,98 @@ func createParser() -> ([String:Option], CommandLineKit) {
 
     parser.addOptions(Array(flags.values))
 
+    parser.formatOutput = {parseString, type in
+
+        var formattedString: String
+
+        switch type {
+        case .About:
+            formattedString = "\(parseString) [<artist_name> <song_name>]"
+            break
+        default:
+            formattedString = parseString
+        }
+
+        return parser.defaultFormat(formattedString, type: type)
+    }
+
     return (flags, parser)
 }
 
-func main() {
+// Handle the Help flag
 
-    let (flags, parser) = createParser()
-
-    do {
-        try parser.parse()
-    }
-    catch {
-        parser.printUsage(error)
-        exit(EX_USAGE)
-    }
-
-    if let helpFlag = flags["help"] as? BoolOption {
-        if helpFlag.value == true {
+private func checkHelpFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let helpFlag = flag as? BoolOption {
+        if helpFlag.value {
             parser.printUsage()
             exit(0)
         }
     }
+}
 
-    if let versionFlag = flags["version"] as? BoolOption {
-        if versionFlag.value == true {
+// Handle the version flag
+
+private func checkVersionFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let versionFlag = flag as? BoolOption {
+        if versionFlag.value {
             print(Lyricli.version)
             exit(0)
         }
     }
+}
 
-    if let listSourcesFlag = flags["listSources"] as? BoolOption {
-        if listSourcesFlag.value == true {
+// Handle the list sources flag
+
+private func checkListSourcesFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let listSourcesFlag = flag as? BoolOption {
+        if listSourcesFlag.value {
             Lyricli.printSources()
             exit(0)
         }
     }
+}
 
-    if let enableSourceFlag = flags["enableSource"] as? StringOption {
+// Handle the title flag
+
+private func checkTitleFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let titleFlag = flag as? BoolOption {
+        if titleFlag.value {
+            Lyricli.showTitle = true
+        }
+    }
+}
+
+// Handle the enable source flag
+
+private func checkEnableSourceFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let enableSourceFlag = flag as? StringOption {
         if let source = enableSourceFlag.value {
             Lyricli.enableSource(source)
             exit(0)
         }
     }
+}
 
-    if let disableSourceFlag = flags["disableSource"] as? StringOption {
+// Handle the disable source flag
+
+private func checkDisableSourceFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let disableSourceFlag = flag as? StringOption {
         if let source = disableSourceFlag.value {
             Lyricli.disableSource(source)
             exit(0)
         }
     }
+}
 
-    if let resetSourceFlag = flags["resetSource"] as? StringOption {
+// Handle the reset source flag
+
+private func checkResetSourceFlag(_ flag: Option?, withParser parser: CommandLineKit) {
+    if let resetSourceFlag = flag as? StringOption {
         if let source = resetSourceFlag.value {
             Lyricli.resetSource(source)
             exit(0)
         }
     }
-
-    if let titleFlag = flags["title"] as? BoolOption {
-        if titleFlag.value == true {
-            Lyricli.showTitle = true
-        }
-    }
-
-    // Remove any flags so anyone after this gets the unprocessed values
-    let programName: [String] = [CommandLine.arguments[0]]
-    CommandLine.arguments = programName + parser.unparsedArguments
-
-    Lyricli.printLyrics()
 }
 
 main()
