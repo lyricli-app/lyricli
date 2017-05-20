@@ -3,7 +3,8 @@ class SourceManager {
 
     // List of sources enabled for the crurent platform
     private var availableSources: [String: Source] = [
-        "arguments": ArgumentsSource()
+        "arguments": ArgumentsSource(),
+        "itunes": ItunesSource()
     ]
 
     // Iterate over the sources until we find a track or run out of sources
