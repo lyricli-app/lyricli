@@ -1,15 +1,20 @@
-/// The main Lyricli interface
-public class Lyricli {
-    public static var version = "0.0.0"
+// The main class, handles all the actions that the executable will call
+class Lyricli {
 
-    public static var showTitle = false
+    // Version of the application
+    static var version = "0.0.0"
 
-    public static func printLyrics() {
+    // Flag that controls whether we should show the track artist and name before
+    // the lyrics
+    static var showTitle = false
+
+    // Obtains the name of the current track from a source, fetches the lyrics
+    // from an engine and prints them
+    static func printLyrics() {
 
         let sourceManager = SourceManager()
 
         if let currentTrack = sourceManager.currentTrack {
-
             let engine = LyricsEngine(withTrack: currentTrack)
 
             if let lyrics = engine.lyrics {
@@ -27,22 +32,28 @@ public class Lyricli {
         }
     }
 
-    public static func printSources() {
+    // Print the currently available sources
+    static func printSources() {
         print("Listing Sources: Not yet implemented")
     }
 
-    public static func enableSource(_ sourceName: String) {
+    // Runs the enable method of a source and writes the configuration to set it
+    // as enabled
+    static func enableSource(_ sourceName: String) {
         print("Enable source \(sourceName): Not yet implemented")
     }
 
-    public static func disableSource(_ sourceName: String) {
+    // Remove a source from the enabled sources configuration
+    static func disableSource(_ sourceName: String) {
         print("Disable source \(sourceName): Not yet implemented")
     }
 
-    public static func resetSource(_ sourceName: String) {
+    // Removes any configuration for a source, and disables it
+    static func resetSource(_ sourceName: String) {
         print("Reset source \(sourceName): Not yet implemented")
     }
 
+    // Prints the track artist and name
     private static func printTitle(_ track: Track) {
         print("\(track.artist) - \(track.name)")
     }

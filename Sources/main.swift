@@ -1,7 +1,8 @@
 import CommandLineKit
 import Foundation
 
-func main() {
+// Entry point of the application. This is the main executable
+private func main() {
     let (flags, parser) = createParser()
 
     do {

@@ -1,24 +1,23 @@
 import Foundation
 
-/// Handles reading and writing the configuration
-public class Configuration {
+// Reads and writes the configuration. Config keys are accessed as a dictionary.
+class Configuration {
+    // Location of the global configuration file
+    private let configurationPath = NSString(string: "~/.lyricli.conf").expandingTildeInPath
 
-    let configurationPath = NSString(string: "~/.lyricli.conf").expandingTildeInPath
-
-    // The defaults are added here
-
+    // Default options, will be automatically written to the global config if
+    // not found.
     private var configuration: [String: Any] =  [
-        "enabled_sources": ["arguments"],
-        "default": true
+        "enabled_sources": ["arguments"]
     ]
 
-    static let sharedInstance: Configuration = Configuration()
+    // The shared instance of the object
+    static let shared: Configuration = Configuration()
 
     private init() {
 
-        // Read the config file and attempt toset any of the values. Otherwise
-        // Don't do anything.
-        // IMPROVEMENT: Enable a debug mode
+        // Read the config file and attempt to set any of the values. Otherwise
+        // don't do anything.
 
         if let data = try? NSData(contentsOfFile: configurationPath) as Data {
             if let parsedConfig = try? JSONSerialization.jsonObject(with: data) {
@@ -42,6 +41,7 @@ public class Configuration {
         writeConfiguration()
     }
 
+    // Write the configuration back to the file
     private func writeConfiguration() {
 
         var error: NSError?
@@ -56,7 +56,7 @@ public class Configuration {
         }
     }
 
-    // Allow access as an object
+    // Allow access to the config properties as a dictionary
     subscript(index: String) -> Any? {
         get {
             return configuration[index]
