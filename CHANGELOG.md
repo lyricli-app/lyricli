@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Added
+- iTunes Source Support
+
+### Fixed
+- Lyricli freezes when no track found
+
 ## 0.1.0 - 2017-05-20
 ### Added
 - Documentation with Jazzy / SourceKitten
