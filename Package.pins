@@ -1,0 +1,18 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "CommandeLineKit",
+      "reason": null,
+      "repositoryURL": "https://github.com/rbdr/CommandLineKit",
+      "version": "4.0.0"
+    },
+    {
+      "package": "HTMLEntities",
+      "reason": null,
+      "repositoryURL": "https://github.com/IBM-Swift/swift-html-entities.git",
+      "version": "3.0.3"
+    }
+  ],
+  "version": 1
+}
