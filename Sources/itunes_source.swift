@@ -44,6 +44,10 @@ class ItunesSource: Source {
                     if let name = track.name {
                         if let artist = track.artist {
 
+                            // track properties are empty strings if itunes is closed
+                            if (!(name != "" && artist != "")) {
+                                return nil
+                            }
                             return Track(withName: name, andArtist: artist)
                         }
                     }
