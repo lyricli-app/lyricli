@@ -2,7 +2,7 @@
 class Lyricli {
 
     // Version of the application
-    static var version = "0.2.0"
+    static var version = "0.3.0"
 
     // Flag that controls whether we should show the track artist and name before
     // the lyrics
