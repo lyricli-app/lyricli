@@ -8,7 +8,7 @@ support more sources.
 ## The ~~Roadmap~~ ~~Streetmap~~ ~~Pathmap~~ Corridormap
 
 * Writing sources (They're used to automatically obtain artist and song
-  name from
+  name from apps or services)
 * Writing tests
 * Improving code to match idiomatic swift
 * Improving the documentation
