@@ -32,8 +32,8 @@ document: build
 		--readme README.md \
 		--clean \
 		--author Lyricli \
-		--author_url https://github.com/lyricli-app \
-		--github_url https://github.com/lyricli-app/lyricli \
+		--author_url https://gitlab.com/lyricli \
+		--github_url https://gitlab.com/lyricli/lyricli \
 		--module-version 0.4.0 \
 		--module Lyricli \
 
