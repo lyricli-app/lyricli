@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- `printLyrics(_ currentTrack: Track)` allows directly specifying
+  track in library
+- `lyricli_command` specifies the flags
+
+### Changed
+- Flags are now camelCase
+- Update to Swift 5 tools
+- Replace CommandLineKit with Bariloche
+- Reorganize sources folder
+
+### Removed
+- Arguments Source (functionality moved to main)
+
 ## [0.3.0]
 ### Added
 - Spotify Source Support
