@@ -3,7 +3,6 @@ class SourceManager {
 
     // List of sources enabled for the crurent platform
     private var availableSources: [String: Source] = [
-        "arguments": ArgumentsSource(),
         "itunes": ItunesSource(),
         "spotify": SpotifySource()
     ]

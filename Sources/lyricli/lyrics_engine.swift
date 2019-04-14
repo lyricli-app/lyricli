@@ -119,12 +119,12 @@ class LyricsEngine {
         // Look for the lyrics lightbox
 
         if let regex = try? NSRegularExpression(pattern: lyricsMatcher) {
-            let matches = regex.matches(in: body, range: NSRange(location: 0, length: body.characters.count))
+            let matches = regex.matches(in: body, range: NSRange(location: 0, length: body.count))
 
             for match in matches {
 
                 let nsBody = body as NSString
-                let range = match.rangeAt(1)
+                let range = match.range(at: 1)
                 let encodedLyrics = nsBody.substring(with: range)
 
                 let decodedLyrics = decodeLyrics(encodedLyrics)

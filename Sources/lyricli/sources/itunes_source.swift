@@ -12,7 +12,7 @@ import ScriptingBridge
     @objc optional var currentStreamTitle: String? {get}
 }
 
-extension SBApplication : iTunesApplication {}
+extension SBApplication: iTunesApplication {}
 
 // Source that reads track artist and name from current itunes track
 class ItunesSource: Source {
@@ -26,7 +26,7 @@ class ItunesSource: Source {
             if let currentStreamTitle = iTunes.currentStreamTitle {
                 if let track = currentStreamTitle {
 
-                    let trackComponents = track.characters.split(separator: "-").map(String.init)
+                    let trackComponents = track.split(separator: "-").map(String.init)
 
                     if trackComponents.count == 2 {
                         let artist = trackComponents[0].trimmingCharacters(in: .whitespaces)
@@ -45,7 +45,7 @@ class ItunesSource: Source {
                         if let artist = track.artist {
 
                             // track properties are empty strings if itunes is closed
-                            if (!(name != "" && artist != "")) {
+                            if name == "" || artist == "" {
                                 return nil
                             }
                             return Track(withName: name, andArtist: artist)

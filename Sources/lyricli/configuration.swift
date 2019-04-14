@@ -8,7 +8,7 @@ class Configuration {
     // Default options, will be automatically written to the global config if
     // not found.
     private var configuration: [String: Any] =  [
-        "enabled_sources": ["arguments", "itunes", "spotify"]
+        "enabled_sources": ["itunes", "spotify"]
     ]
 
     // The shared instance of the object
