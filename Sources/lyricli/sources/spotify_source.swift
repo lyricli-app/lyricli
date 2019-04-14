@@ -11,7 +11,7 @@ import ScriptingBridge
     @objc optional var currentTrack: SpotifyTrack? {get}
 }
 
-extension SBApplication : SpotifyApplication {}
+extension SBApplication: SpotifyApplication {}
 
 // Source that reads track artist and name from current Spotify track
 class SpotifySource: Source {
@@ -38,4 +38,3 @@ class SpotifySource: Source {
     }
 
 }
-
