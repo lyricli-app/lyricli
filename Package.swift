@@ -1,9 +1,22 @@
+// swift-tools-version:5.0
+
 import PackageDescription
 
 let package = Package(
     name: "lyricli",
     dependencies: [
-        .Package(url: "https://github.com/rbdr/CommandLineKit", majorVersion: 4, minor: 0),
-        .Package(url: "https://github.com/IBM-Swift/swift-html-entities.git", majorVersion: 3, minor: 0)
+        /// 🔡 Tools for working with HTML entities
+        .package(url: "https://github.com/IBM-Swift/swift-html-entities.git", from: "3.0.11"),
+
+        /// 🚩 Command Line Arguments
+        .package(url: "https://github.com/Subito-it/Bariloche", from: "1.0.4")
+    ],
+    targets: [
+        .target(
+            name: "lyricli",
+            dependencies: ["HTMLEntities", "Bariloche"]),
+        .testTarget(
+            name: "lyricliTests",
+            dependencies: ["lyricli"]),
     ]
 )
