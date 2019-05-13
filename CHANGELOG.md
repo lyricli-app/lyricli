@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `lyricli_command` specifies the flags
 
 ### Changed
+- CI scripts updated for gitlab CI instead of Travis
 - Flags are now single words
 - Update to Swift 5 tools
 - Replace CommandLineKit with Bariloche
