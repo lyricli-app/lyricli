@@ -1,0 +1,43 @@
+image: swift:5.0.1
+
+stages:
+  - lint
+  - build
+  - document
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
+  paths:
+    - .build/
+
+before_script:
+  - gem install jazzy
+  - "./Scripts/install_sourcekitten.sh"
+  - "./Scripts/install_swiftlint.sh"
+
+lint:
+  stage: lint
+  script:
+    - make lint
+
+build:
+  stage: build
+  script:
+    - make build
+
+document:
+  stage: document
+  script:
+    - make document
+  artifacts:
+    paths:
+      - docs
+
+pages:
+  stage: deploy
+  script:
+    - mv docs public
+  artifacts:
+    paths:
+      - public
