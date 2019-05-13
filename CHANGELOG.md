@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `lyricli_command` specifies the flags
 
 ### Changed
-- Flags are now camelCase
+- Flags are now single words
 - Update to Swift 5 tools
 - Replace CommandLineKit with Bariloche
 - Reorganize sources folder
