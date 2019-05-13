@@ -14,9 +14,6 @@ let package = Package(
     targets: [
         .target(
             name: "lyricli",
-            dependencies: ["HTMLEntities", "Bariloche"]),
-        .testTarget(
-            name: "lyricliTests",
-            dependencies: ["lyricli"]),
+            dependencies: ["HTMLEntities", "Bariloche"])
     ]
 )
