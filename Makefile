@@ -38,6 +38,6 @@ document: build
 		--module Lyricli \
 
 clean:
-	swift build --clean
+	swift package clean
 
 .PHONY: build install test clean lint
