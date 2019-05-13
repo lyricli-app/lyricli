@@ -1,4 +1,4 @@
-image: swift:5.0.1
+image: lyriclitest/swift:5.0.1
 
 stages:
   - lint
@@ -10,12 +10,6 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
   paths:
     - .build/
-
-before_script:
-  - apt install -y ruby ruby-dev libsqlite3-dev wget
-  - gem install jazzy
-  - "./Scripts/install_sourcekitten.sh"
-  - "./Scripts/install_swiftlint.sh"
 
 lint:
   stage: lint
