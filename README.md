@@ -39,7 +39,7 @@ In order to configure
 
 ## Building
 
-The build has only been tested on OSX using Swift 3.1. Building defaults
+The build has only been tested on OSX using Swift 5.0.1. Building defaults
 to the debug configuration.
 
 ```
