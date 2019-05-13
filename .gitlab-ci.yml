@@ -12,6 +12,7 @@ cache:
     - .build/
 
 before_script:
+  - apt install -y ruby ruby-dev libsqlite3-dev
   - gem install jazzy
   - "./Scripts/install_sourcekitten.sh"
   - "./Scripts/install_swiftlint.sh"
