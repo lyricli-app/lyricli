@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `printLyrics(_ currentTrack: Track)` allows directly specifying
   track in library
 - `lyricli_command` specifies the flags
+- Support for catalina Music app
 
 ### Changed
 - CI scripts updated for gitlab CI instead of Travis
@@ -16,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Update to Swift 5 tools
 - Replace CommandLineKit with Bariloche
 - Reorganize sources folder
+- Does not open apps when running
 
 ### Removed
 - Arguments Source (functionality moved to main)
