@@ -2,7 +2,6 @@ image: lyriclitest/swift:5.0.1
 
 stages:
   - lint
-  - build
   - document
   - deploy
 
@@ -15,11 +14,6 @@ lint:
   stage: lint
   script:
     - make lint
-
-build:
-  stage: build
-  script:
-    - make build
 
 document:
   stage: document
