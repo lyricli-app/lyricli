@@ -28,18 +28,18 @@ song and artist names before the lyrics.
 
 In order to configure
 
-* `lrc -l` or `lrc --list-sources` lists the available sources. Enabled
+* `lrc -l` or `lrc --list` lists the available sources. Enabled
   sourcess will have a `*`
 * `lrc -e` or `lrc --enable <source>` enables a source
 * `lrc -d` or `lrc --disable <source>` disables a source
-* `lrc -r` or `lrc --reset-source <source>` resets the configuration for
+* `lrc -r` or `lrc --reset <source>` resets the configuration for
   a source and disables it.
 * `lrc -v` or `lrc --version` prints the version
 * `lrc -h` or `lrc --help` display built-in help
 
 ## Building
 
-The build has only been tested on OSX using Swift 3.1. Building defaults
+The build has only been tested on OSX using Swift 5.0.1. Building defaults
 to the debug configuration.
 
 ```
@@ -77,8 +77,6 @@ tests.
 ```
 make test
 ```
-
-[![Build Status](https://travis-ci.org/lyricli-app/lyricli.svg?branch=master)](https://travis-ci.org/lyricli-app/lyricli)
 
 [swiftlint]: https://github.com/realm/SwiftLint
 [jazzy]: https://github.com/realm/jazzy

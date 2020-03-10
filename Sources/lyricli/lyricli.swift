@@ -2,7 +2,7 @@
 class Lyricli {
 
     // Version of the application
-    static var version = "0.3.0"
+    static var version = "1.0.0"
 
     // Flag that controls whether we should show the track artist and name before
     // the lyrics
@@ -15,20 +15,24 @@ class Lyricli {
         let sourceManager = SourceManager()
 
         if let currentTrack = sourceManager.currentTrack {
-            let engine = LyricsEngine(withTrack: currentTrack)
-
-            if let lyrics = engine.lyrics {
-                if showTitle {
-                    printTitle(currentTrack)
-                }
-
-                print(lyrics)
-            } else {
-                print("Lyrics not found :(")
-            }
-
+            printLyrics(currentTrack)
         } else {
             print("No Artist/Song could be found :(")
+        }
+    }
+
+    // fetches the lyrics from an engine and prints them
+    static func printLyrics(_ currentTrack: Track) {
+        let engine = LyricsEngine(withTrack: currentTrack)
+
+        if let lyrics = engine.lyrics {
+            if showTitle {
+                printTitle(currentTrack)
+            }
+
+            print(lyrics)
+        } else {
+            print("Lyrics not found :(")
         }
     }
 

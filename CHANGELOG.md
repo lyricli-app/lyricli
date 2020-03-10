@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+## [1.0.0]
+### Added
+- `printLyrics(_ currentTrack: Track)` allows directly specifying
+  track in library
+- `lyricli_command` specifies the flags
+- Support for catalina Music app
+
+### Changed
+- CI scripts updated for gitlab CI instead of Travis
+- Flags are now single words
+- Update to Swift 5 tools
+- Replace CommandLineKit with Bariloche
+- Reorganize sources folder
+- Does not open apps when running
+
+### Removed
+- Arguments Source (functionality moved to main)
+
 ## [0.3.0]
 ### Added
 - Spotify Source Support
@@ -32,6 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Parsing of options to match legacy lyricli
 - Placeholder for the library with expected endpoints
 
+[1.0.0]: https://github.com/lyricli-app/lyricli/compare/0.3.0...1.0.0
 [0.3.0]: https://github.com/lyricli-app/lyricli/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/lyricli-app/lyricli/compare/0.1.0...0.2.0
 [Unreleased]: https://github.com/lyricli-app/lyricli/compare/master...develop

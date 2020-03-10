@@ -1,0 +1,14 @@
+image: lyriclitest/swift:5.0.1
+
+stages:
+  - lint
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
+  paths:
+    - .build/
+
+lint:
+  stage: lint
+  script:
+    - make lint
