@@ -14,7 +14,10 @@ install: configuration = release
 
 default: build
 
-build:
+prebuild:
+	mkdir -p $(build_path)
+
+build: prebuild
 	swift build --build-path $(build_path) --configuration $(configuration)
 
 install: build
@@ -26,7 +29,7 @@ test: build
 lint:
 	cd Sources && swiftlint
 
-document: build
+document: prebuild
 	sourcekitten doc --spm-module $(source_binary_name) > $(build_path)/$(source_binary_name).json
 	jazzy \
 		-s $(build_path)/$(source_binary_name).json \
