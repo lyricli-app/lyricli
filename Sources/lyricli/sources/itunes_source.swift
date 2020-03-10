@@ -1,4 +1,5 @@
 import ScriptingBridge
+import Foundation
 
 // Protocol to obtain the track from iTunes
 @objc protocol iTunesTrack {
@@ -20,7 +21,12 @@ class ItunesSource: Source {
     // Calls the spotify API and returns the current track
     var currentTrack: Track? {
 
-        if let iTunes: iTunesApplication = SBApplication(bundleIdentifier: "com.apple.iTunes") {
+        if let iTunes: iTunesApplication = SBApplication(bundleIdentifier: bundleIdentifier) {
+            if let application = iTunes as? SBApplication {
+              if !application.isRunning {
+                return nil
+              }
+            }
 
             // Attempt to fetch the title from a stream
             if let currentStreamTitle = iTunes.currentStreamTitle {
@@ -56,6 +62,16 @@ class ItunesSource: Source {
         }
 
         return nil
+    }
+
+    private var bundleIdentifier: String {
+        if ProcessInfo().isOperatingSystemAtLeast(
+          OperatingSystemVersion(majorVersion: 10, minorVersion: 15, patchVersion: 0)
+          ) {
+          return "com.apple.Music"
+        }
+
+        return "com.apple.iTunes"
     }
 
 }

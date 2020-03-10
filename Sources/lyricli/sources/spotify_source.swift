@@ -20,8 +20,14 @@ class SpotifySource: Source {
     var currentTrack: Track? {
 
         if let spotify: SpotifyApplication = SBApplication(bundleIdentifier: "com.spotify.client") {
+            if let application = spotify as? SBApplication {
+              if !application.isRunning {
+                return nil
+              }
+            }
 
             // Attempt to fetch the title from a song
+
             if let currentTrack = spotify.currentTrack {
                 if let track = currentTrack {
                     if let name = track.name {
