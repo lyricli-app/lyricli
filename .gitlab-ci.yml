@@ -2,8 +2,6 @@ image: lyriclitest/swift:5.0.1
 
 stages:
   - lint
-  - document
-  - deploy
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHA}
