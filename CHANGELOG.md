@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [1.0.0]
 ### Added
 - `printLyrics(_ currentTrack: Track)` allows directly specifying
   track in library
@@ -50,6 +52,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Parsing of options to match legacy lyricli
 - Placeholder for the library with expected endpoints
 
+[1.0.0]: https://github.com/lyricli-app/lyricli/compare/0.3.0...1.0.0
 [0.3.0]: https://github.com/lyricli-app/lyricli/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/lyricli-app/lyricli/compare/0.1.0...0.2.0
 [Unreleased]: https://github.com/lyricli-app/lyricli/compare/master...develop
