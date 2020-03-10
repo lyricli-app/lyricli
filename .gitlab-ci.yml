@@ -12,19 +12,3 @@ lint:
   stage: lint
   script:
     - make lint
-
-document:
-  stage: document
-  script:
-    - make document
-  artifacts:
-    paths:
-      - docs
-
-pages:
-  stage: deploy
-  script:
-    - mv docs public
-  artifacts:
-    paths:
-      - public
