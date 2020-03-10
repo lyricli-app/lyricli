@@ -1,4 +1,5 @@
 import ScriptingBridge
+import Foundation
 
 // Protocol to obtain the track from iTunes
 @objc protocol iTunesTrack {
@@ -12,7 +13,7 @@ import ScriptingBridge
     @objc optional var currentStreamTitle: String? {get}
 }
 
-extension SBApplication : iTunesApplication {}
+extension SBApplication: iTunesApplication {}
 
 // Source that reads track artist and name from current itunes track
 class ItunesSource: Source {
@@ -20,13 +21,18 @@ class ItunesSource: Source {
     // Calls the spotify API and returns the current track
     var currentTrack: Track? {
 
-        if let iTunes: iTunesApplication = SBApplication(bundleIdentifier: "com.apple.iTunes") {
+        if let iTunes: iTunesApplication = SBApplication(bundleIdentifier: bundleIdentifier) {
+            if let application = iTunes as? SBApplication {
+              if !application.isRunning {
+                return nil
+              }
+            }
 
             // Attempt to fetch the title from a stream
             if let currentStreamTitle = iTunes.currentStreamTitle {
                 if let track = currentStreamTitle {
 
-                    let trackComponents = track.characters.split(separator: "-").map(String.init)
+                    let trackComponents = track.split(separator: "-").map(String.init)
 
                     if trackComponents.count == 2 {
                         let artist = trackComponents[0].trimmingCharacters(in: .whitespaces)
@@ -45,7 +51,7 @@ class ItunesSource: Source {
                         if let artist = track.artist {
 
                             // track properties are empty strings if itunes is closed
-                            if (!(name != "" && artist != "")) {
+                            if name == "" || artist == "" {
                                 return nil
                             }
                             return Track(withName: name, andArtist: artist)
@@ -56,6 +62,16 @@ class ItunesSource: Source {
         }
 
         return nil
+    }
+
+    private var bundleIdentifier: String {
+        if ProcessInfo().isOperatingSystemAtLeast(
+          OperatingSystemVersion(majorVersion: 10, minorVersion: 15, patchVersion: 0)
+          ) {
+          return "com.apple.Music"
+        }
+
+        return "com.apple.iTunes"
     }
 
 }

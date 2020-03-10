@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Bariloche",
+        "repositoryURL": "https://github.com/Subito-it/Bariloche",
+        "state": {
+          "branch": null,
+          "revision": "507f4121d2a7479522908dabf83aed78a6e5e268",
+          "version": "1.0.4"
+        }
+      },
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "9c52c1952e9b2305d4507cf473392ac2d7c9b155",
+          "version": "3.1.5"
+        }
+      },
+      {
+        "package": "HTMLEntities",
+        "repositoryURL": "https://github.com/IBM-Swift/swift-html-entities.git",
+        "state": {
+          "branch": null,
+          "revision": "dc15f4d8eba5be23280a561c698fc36ab4fb6c76",
+          "version": "3.0.12"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

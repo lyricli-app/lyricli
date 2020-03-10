@@ -7,6 +7,7 @@ target_binary_name = lrc
 install_path = /usr/local/bin
 source_binary_path = $(build_path)/$(configuration)/$(source_binary_name)
 install_binary_path = $(install_path)/$(target_binary_name)
+swift_version = 5.0.1
 
 # Default to release configuration on install
 install: configuration = release
@@ -32,12 +33,18 @@ document: build
 		--readme README.md \
 		--clean \
 		--author Lyricli \
-		--author_url https://github.com/lyricli-app \
-		--github_url https://github.com/lyricli-app/lyricli \
-		--module-version 0.3.0 \
+		--author_url https://gitlab.com/lyricli \
+		--github_url https://gitlab.com/lyricli/lyricli \
+		--module-version 1.0.0 \
 		--module Lyricli \
 
 clean:
-	swift build --clean
+	swift package clean
 
-.PHONY: build install test clean lint
+docker-build:
+	docker build --force-rm --build-arg swift_version=$(swift_version) -t lyriclitest/swift:$(swift_version) .
+
+docker-push: docker-build
+	docker push lyriclitest/swift:$(swift_version)
+
+.PHONY: build install test clean lint docker-build docker-push
